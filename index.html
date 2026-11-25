@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0e0824">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>فويد: أثر في الزمكان</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icons/icon-192.png"><link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="rotate"><div>↻</div><p>لف الموبايل بالعرض عشان تلعب</p></div>
+<div id="stage">
+  <canvas id="cv"></canvas>
+  <!-- splash -->
+  <section id="splash" class="screen on"><img src="assets/icons/icon-512.png" class="logo" alt=""><div class="bar"><i id="loadbar"></i></div><p id="tap">جاري التحميل...</p></section>
+  <!-- menu -->
+  <section id="menu" class="screen"><img class="wordmark" src="assets/img/ui/void_wordmark.webp" alt="فويد"><div id="menuVoid" class="dspr"></div>
+    <button class="gbtn big" id="bPlay"><img src="assets/img/ui/dash_button.webp" alt=""><b>ابدأ</b></button>
+    <button class="gbtn" id="bAch"><img src="assets/img/ui/achievement_medal.webp" alt=""><b>الإنجازات</b></button>
+    <button class="rbtn" id="bSnd"><img src="assets/img/ui/sound.webp" alt=""></button>
+    <div class="tot"><img src="assets/img/ui/crystal.webp" alt=""><span id="menuCr">0</span></div></section>
+  <!-- level select -->
+  <section id="levels" class="screen"><div id="map"><svg id="mapsvg"></svg></div><button class="rbtn tl" id="lvBack"><img src="assets/img/ui/restart.webp" alt=""></button>
+    <div id="sheet"><h3 id="shT"></h3><p id="shW"></p><div id="shS"></div><p id="shB"></p><p id="shG"></p><button class="gbtn wide" id="shGo"><b>ابدأ</b></button></div></section>
+  <!-- story -->
+  <section id="story" class="screen"><img id="stImg" alt=""><div id="stBox"><span id="stWho"></span><p id="stTxt"></p></div><button id="stSkip">تخطّي</button><div id="stDots"></div></section>
+  <!-- game HUD -->
+  <section id="hud" class="screen"><div id="hudTop"><div class="chip"><img src="assets/img/ui/death_panel.webp" alt=""><b id="hDeaths">0</b></div><div class="chip"><img src="assets/img/ui/crystal.webp" alt=""><b id="hCr">0</b></div><div class="chip tm"><b id="hTime">0.0</b></div><div id="prog"><i id="progI"></i></div></div>
+    <button class="rbtn tr" id="bPause"><img src="assets/img/ui/pause.webp" alt=""></button>
+    <div id="joy"><img src="assets/img/ui/joystick_base.webp" alt=""><img id="knob" src="assets/img/ui/joystick_knob.webp" alt=""></div>
+    <div id="abs"></div><div id="toast"></div><div id="tutor"></div></section>
+  <!-- pause -->
+  <section id="pause" class="screen modal"><div class="panel"><h2>إيقاف مؤقت</h2><button class="gbtn wide" id="pResume"><b>كمّل</b></button><button class="gbtn wide" id="pRestart"><b>من الأول</b></button><button class="gbtn wide" id="pMap"><b>الخريطة</b></button></div></section>
+  <!-- result -->
+  <section id="result" class="screen modal"><div class="panel"><h2 id="rT">عدّيت!</h2><div id="rStars"></div><p id="rTime"></p><p id="rInfo"></p><div id="rAch"></div><div class="row"><button class="gbtn wide" id="rNext"><b>التالي</b></button><button class="gbtn wide" id="rRetry"><b>إعادة</b></button><button class="gbtn wide" id="rMap"><b>الخريطة</b></button></div></div></section>
+  <!-- achievements -->
+  <section id="ach" class="screen"><h2>الإنجازات</h2><div id="achList"></div><button class="rbtn tl" id="achBack"><img src="assets/img/ui/restart.webp" alt=""></button></section>
+</div>
+<script src="js/audio.js"></script><script src="js/game.js"></script><script src="js/ui.js"></script>
+</body></html>
