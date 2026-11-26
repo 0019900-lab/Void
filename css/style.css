@@ -101,7 +101,7 @@ img{-webkit-user-drag:none;pointer-events:none}
 #bDash img{width:100%;display:block}#bDash.dis{opacity:.45}#bDash:active{transform:scale(.9)}
 #joy{width:110px;height:110px;margin:-55px 0 0 -55px;opacity:.85}#joy #knob{width:50px;left:30px;top:30px}
 #toast{top:62px}
-#tutor{left:calc(var(--m) + 20px);right:200px;bottom:128px;text-align:center}
+#tutor{left:calc(var(--m) + 150px);right:calc(var(--m) + 150px);top:62px;bottom:auto;font-size:14px;padding:5px 12px;background:#0007;text-align:center}
 #replayTag{position:absolute;top:56px;left:0;right:0;text-align:center;opacity:0;transition:.4s;text-shadow:0 2px 10px #000;pointer-events:none}#replayTag.on{opacity:1}
 #replayTag b{font-size:24px;color:var(--gold);display:block}#replayTag small{font-size:14px;color:#cfc3ff}
 /* result */
@@ -114,3 +114,10 @@ img{-webkit-user-drag:none;pointer-events:none}
 #stBox::before{content:"";position:absolute;inset:-60px -40px 100% -40px;background:none}
 #stTxt{font-size:23px}
 #stSkip{left:var(--m)}#stDots{right:var(--m)}
+
+/* v0.3: bigger readable HUD */
+#hDeath::after{content:'موتات';font-size:12px;color:#cfc3ff;margin-right:4px}
+#bPlay b{right:0;left:auto;width:100%}
+#bPlay{bottom:60px}
+.tot{left:calc(var(--m) + 4px)}
+#stBox{height:84px;bottom:10px}#stSkip{padding:10px 20px;font-size:17px}
