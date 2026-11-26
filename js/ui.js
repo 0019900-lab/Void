@@ -119,7 +119,7 @@ async function boot() {
   game = new Game($('cv'), { onDeath: n => { $('hDeaths').textContent = n; const e = $('hDeath'); e.classList.remove('pop'); e.offsetWidth; e.classList.add('pop'); }, onCrystal: n => { $('hCr').textContent = n; }, onWin: finish,
     onCheckpoint: (a, b) => toast(`نقطة رجوع ${a}/${b}`, 1200), onReplay: () => $('replayTag').classList.add('on') });
   fit(); mv = new DSprite($('menuVoid'), 224); mv.set('idle', 0); $('tap').textContent = 'المس للبدء'; $('tap').className = 'rdy';
-  $('splash').onpointerdown = () => { $('splash').onpointerdown = null; SFX.init(); show('menu'); resetIdle(); }; $('menuVoid').addEventListener('pointerdown', menuTap);
+  $('splash').onpointerdown = () => { $('splash').onpointerdown = null; SFX.init(); try { const d = document.documentElement; (d.requestFullscreen ? d.requestFullscreen({ navigationUI: 'hide' }) : Promise.reject()).then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape')).catch(() => {}); } catch (e) {} show('menu'); resetIdle(); }; $('menuVoid').addEventListener('pointerdown', menuTap);
   $('bPlay').onclick = () => { SFX.play('click'); buildMap(); show('levels'); };
   $('bAch').onclick = () => { SFX.play('click'); $('achList').innerHTML = ACH.map(a => `<div class="ai ${Save.d.ach[a[0]] ? '' : 'lock'}"><img src="assets/img/ui/achievement_medal.webp" alt=""><div><b>${a[1]}</b><span>${a[2]}</span></div></div>`).join(''); show('ach'); };
   $('achBack').onclick = () => show('menu'); $('lvBack').onclick = () => { SFX.play('click'); show('menu'); };
@@ -128,6 +128,6 @@ async function boot() {
   $('bPause').onclick = () => pause(true); $('pResume').onclick = () => pause(false); $('pRestart').onclick = () => startLevel(cur); $('pMap').onclick = toMap;
   $('rNext').onclick = () => play(cur + 1); $('rRetry').onclick = () => startLevel(cur); $('rMap').onclick = toMap;
   $('rReplay').onclick = () => { overlay('result', false); game.replayDone = false; game.startReplay(); };
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  if ('serviceWorker' in navigator) { const had = !!navigator.serviceWorker.controller; navigator.serviceWorker.addEventListener('controllerchange', () => { if (had) location.reload(); }); navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(r => r.update()).catch(() => {}); }
 }
 boot();
