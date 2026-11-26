@@ -15,4 +15,4 @@
 - كيبورد: WASD/أسهم · Space اندفاع · E بلع · Q درع · R تمدد الزمن · F طيف · B انفجار الكتلة · Esc إيقاف.
 
 ## البنية
-`index.html` · `js/` (audio, game, ui) · `css/` · `data/` (levels.json, story.json) · `assets/` (محسّنة) · `sw.js` · `tools/build_assets.py` (يعيد بناء الأصول من الملفات الخام).
+`index.html` · `js/` (audio, game, ui) · `data/levels6.json` + `story6.json` · `css/` · `data/` (levels.json, story.json) · `assets/` (محسّنة) · `sw.js` · `tools/build_assets.py` (يعيد بناء الأصول من الملفات الخام).

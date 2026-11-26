@@ -26,6 +26,13 @@ const SFX = (() => {
   }
   const P = [0, 2, 4, 7, 9]; // pentatonic
   const lib = {
+    jump: () => tone(380, 760, .14, 'triangle', .2),
+    djump: () => { tone(560, 1100, .16, 'sine', .22); tone(840, 1500, .12, 'triangle', .1, .04); },
+    land: () => noise(.08, 700, 200, .12),
+    wallj: () => { tone(300, 820, .15, 'square', .08); noise(.1, 2500, 800, .12); },
+    spring: () => { tone(200, 900, .25, 'sine', .3); tone(400, 1400, .2, 'triangle', .12, .05); },
+    sawDeath: () => { noise(.3, 5000, 600, .3); tone(700, 90, .35, 'sawtooth', .18); },
+    rewind: () => { tone(120, 1600, .9, 'sawtooth', .07); noise(.9, 400, 5000, .12); },
     click: () => tone(660, 880, .08, 'triangle', .2),
     dash: () => { noise(.16, 3000, 400, .3); tone(300, 900, .12, 'sawtooth', .08); },
     swallow: () => { tone(90, 420, .5, 'sine', .35); noise(.45, 200, 1800, .18); },
