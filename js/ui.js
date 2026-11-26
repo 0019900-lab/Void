@@ -12,6 +12,8 @@ function show(id) { document.querySelectorAll('.screen').forEach(s => s.classLis
 function overlay(id, on) { $(id).classList.toggle('on', on); }
 function fit() { S = Math.min(innerHeight / 450, innerWidth / 720); SW = innerWidth / S; const st = $('stage'); st.style.width = SW + 'px'; st.style.transform = `scale(${S})`; st.style.left = '0px'; st.style.top = (innerHeight - 450 * S) / 2 + 'px'; st.style.setProperty('--m', Math.max(10, SW * .045) + 'px'); if (game) game.resize(S, SW); }
 addEventListener('resize', fit); fit();
+/* splash Void: plays the idle sheet right away (before the heavy assets load) */
+(() => { const e = document.getElementById('sVoid'); if (!e) return; e.style.backgroundImage = 'url(assets/sprites/idle.webp)'; e.style.backgroundSize = '1200px 400px'; let k = 0; const id = setInterval(() => { if (!document.getElementById('splash').classList.contains('on')) return clearInterval(id); const m = k % 22, i = m < 12 ? m : 22 - m; e.style.backgroundPosition = `${-(i % 6) * 200}px ${-Math.floor(i / 6) * 200}px`; k++; }, 100); })();
 
 /* ---- Void on the UI screens (js/pet.js): menu pet reacts to taps, holds, idle time, buttons; other screens use small pets ---- */
 let mv, taps = 0, tapTimer = 0, lastInput = 0, fidgetAt = 0, holdTO = 0, petting = false, petTick = 0, busyGo = false;
@@ -51,7 +53,7 @@ function initPets() {
   if (achPet) { achPet.onShow = () => achPet.react([CL('win', 0, 11, 14, .9, { hop: 200 })]); $('aPet').onpointerdown = () => { SFX.play('giggle'); achPet.react(RX.giggle()); }; }
   if (mapPet) mapPet.onShow = () => { if (mapPet.mode === 'idle' && !mapPet.moveTween) mapPet.react([PO(UTP, 9, .5, { hop: 220 })]); };
 }
-const petXY = i => [NX(i) - 46, NY(i) - 37 - 84];
+const petXY = i => [NX(i) - 46, NY(i) - 37 - 100];
 function mapPetSet(i, anim) { if (!mapPet) return; const [x, y] = petXY(i);
   if (!anim || mapPet.tx === 0 && mapPet.ty === 0) { mapPet.tx = x; mapPet.ty = y; mapPet.moveTween = null; mapIdx = i; return; }
   if (mapIdx === i) return; const d = Math.hypot(x - mapPet.tx, y - mapPet.ty); mapIdx = i;
@@ -150,7 +152,7 @@ async function boot() {
   await loadAssets(p => $('loadbar').style.width = p * 100 + '%');
   game = new Game($('cv'), { onDeath: n => { $('hDeaths').textContent = n; const e = $('hDeath'); e.classList.remove('pop'); e.offsetWidth; e.classList.add('pop'); }, onCrystal: n => { $('hCr').textContent = n; }, onWin: finish,
     onCheckpoint: (a, b) => toast(`نقطة رجوع ${a}/${b}`, 1200), onReplay: () => $('replayTag').classList.add('on') });
-  fit(); $('menuVoid').classList.add('pet'); mv = new Pet($('menuVoid'), { size: 210, follow: true }); initPets(); setInterval(menuTick, 500); $('tap').textContent = 'المس للبدء'; $('tap').className = 'rdy';
+  fit(); $('menuVoid').classList.add('pet'); mv = new Pet($('menuVoid'), { size: 270, follow: true }); initPets(); setInterval(menuTick, 500); $('tap').textContent = 'المس للبدء'; $('tap').className = 'rdy';
   $('splash').onpointerdown = () => { $('splash').onpointerdown = null; SFX.init(); try { const d = document.documentElement; (d.requestFullscreen ? d.requestFullscreen({ navigationUI: 'hide' }) : Promise.reject()).then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape')).catch(() => {}); } catch (e) {} show('menu'); }; $('menuVoid').addEventListener('pointerdown', petDown); addEventListener('pointerup', petUp); addEventListener('pointercancel', petUp); $('menu').addEventListener('pointermove', menuPointer); $('menu').addEventListener('pointerdown', e => { menuPointer(e); if (!e.target.closest('#menuVoid,button')) menuWake(); }); $('menu').addEventListener('pointerleave', () => mv.look(0, 0)); $('menu').addEventListener('pointerup', e => { if (e.pointerType === 'touch') setTimeout(() => mv.look(0, 0), 500); });
   ['bPlay', 'bAch', 'bSnd'].forEach(id => $(id).addEventListener('pointerdown', menuBtnDown));
   $('bPlay').onclick = () => { if (busyGo) return; busyGo = true; SFX.play('click'); mv.react([CL('dash', 0, 11, 20, .62, { dx: 780, sq: .1 })]); setTimeout(() => { buildMap(); show('levels'); }, 440); };

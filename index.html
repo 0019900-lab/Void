@@ -10,13 +10,13 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/icons/icon-192.png"><link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 <link rel="preload" href="assets/fonts/cairo600.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="assets/fonts/lalezar.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="css/style.css">
+<link rel="preload" href="assets/img/bg/menu_bg.webp" as="image"><link rel="preload" href="assets/sprites/idle.webp" as="image"><link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div id="rotate"><div>↻</div><p>لف الموبايل بالعرض عشان تلعب</p></div>
 <div id="stage">
   <canvas id="cv"></canvas>
-  <section id="splash" class="screen on"><img src="assets/icons/icon-512.png" class="logo" alt=""><div class="bar"><i id="loadbar"></i></div><p id="tap">جاري التحميل...</p></section>
+  <section id="splash" class="screen on"><div class="sGlow"></div><img class="swm" src="assets/img/ui/void_wordmark.webp" alt="فويد"><div id="sVoid"></div><div class="bar"><i id="loadbar"></i></div><p id="tap">جاري التحميل...</p></section>
   <section id="menu" class="screen"><canvas id="menuFx"></canvas><img class="wordmark" src="assets/img/ui/void_wordmark.webp" alt="فويد"><div id="menuVoid" class="dspr"></div>
     <button class="gbtn big" id="bPlay"><img src="assets/img/ui/dash_button.webp" alt=""><b>ابدأ</b></button>
     <button class="gbtn" id="bAch"><img src="assets/img/ui/achievement_medal.webp" alt=""><b>الإنجازات</b></button>
@@ -30,7 +30,7 @@
     <div id="hTR"><div class="chip"><img src="assets/img/ui/crystal.webp" alt=""><b id="hCr">0</b></div><button class="rbtn" id="bPause"><img src="assets/img/ui/pause.webp" alt=""></button></div>
     <div id="joy"><img src="assets/img/ui/joystick_base.webp" alt=""><img id="knob" src="assets/img/ui/joystick_knob.webp" alt=""></div>
     <button id="bJump"><img src="assets/img/pf/jump_button.webp" alt=""></button><button id="bDash"><img src="assets/img/pf/dash_button.webp" alt=""><div class="cd"></div></button>
-    <div id="toast"></div><div id="tutor"></div><div id="replayTag"><b>كل محاولاتك مع بعض بضعف السرعة</b><small>الفضا بيتشد حوالين كل شبح · المس للتخطي</small></div></section>
+    <div id="toast"></div><div id="tutor"></div><div id="replayTag"><b>كل محاولاتك مع بعض بسرعة ١.٥×</b><small>الزمكان بيتشوه حوالين كل شبح · المس للتخطي</small></div></section>
   <section id="pause" class="screen modal"><div class="panel"><div id="pPet"></div><h2>إيقاف مؤقت</h2><button class="gbtn wide" id="pResume"><b>كمّل</b></button><button class="gbtn wide" id="pRestart"><b>من الأول</b></button><button class="gbtn wide" id="pMap"><b>الخريطة</b></button></div></section>
   <section id="result" class="screen modal"><div class="panel"><div id="rPet"></div><h2 id="rT">وصلت!</h2><div id="rStars"></div><div id="rGrid"></div><div id="rAch"></div><div class="row"><button class="gbtn wide" id="rNext"><b>اللي بعدها</b></button><button class="gbtn wide" id="rReplay"><b>شوف المحاولات</b></button><button class="gbtn wide" id="rRetry"><b>إعادة</b></button><button class="gbtn wide" id="rMap"><b>القايمة</b></button></div></div></section>
   <section id="ach" class="screen"><h2>الإنجازات</h2><div id="aPet"></div><div id="achList"></div><button class="rbtn tl" id="achBack"><img src="assets/img/ui/back.webp" alt=""></button></section>

@@ -50,7 +50,7 @@ class Pet {
     if (!this.visible()) { this.wasHidden = true; return; } if (this.wasHidden) { this.wasHidden = false; this.onShow && this.onShow(); }
     this.t += dt; const M = PetSprites(); if (!M) return;
     // crossfade
-    if (this.fade < 1) { this.fade = Math.min(1, this.fade + dt / .13); this.A.style.opacity = this.fade; this.B.style.opacity = 1 - this.fade; if (this.fade >= 1) this.B.style.opacity = 0; }
+    if (this.fade < 1) { this.fade = Math.min(1, this.fade + dt / .13); this.A.style.opacity = this.fade; this.B.style.opacity = 1; if (this.fade >= 1) this.B.style.opacity = 0; }
     // what to draw
     let frame = null;
     if (this.moveTween) { const m = this.moveTween; m.t += dt; const k = clamp01(m.t / m.dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; this.tx = m.x0 + (m.x1 - m.x0) * e; this.ty = m.y0 + (m.y1 - m.y0) * e - Math.sin(k * Math.PI) * 14;

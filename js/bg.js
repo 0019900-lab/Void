@@ -30,9 +30,7 @@ const BG = (() => {
     c.save();
 
     // 1. sky fallback (also shows while art loads)
-    const g = c.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, S.sky[0]); g.addColorStop(.55, S.sky[1]); g.addColorStop(1, S.sky[2]);
-    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    c.fillStyle = S.sky[1]; c.fillRect(0, 0, W, H);
 
     // 2. painted far scene: very slow parallax + gentle autonomous drift, slight breathing zoom
     const far = IMG['bg2_w' + world + '_far'];
@@ -49,9 +47,7 @@ const BG = (() => {
     c.globalCompositeOperation = 'lighter';
     // travelling glow that moves deeper into the level as you advance
     const gx = W * (.8 - prog * .55), gy = 130 + Math.sin(t * .3) * 8;
-    let rg = c.createRadialGradient(gx, gy, 0, gx, gy, 320);
-    rg.addColorStop(0, hexA(S.a, .20)); rg.addColorStop(.45, hexA(S.b, .08)); rg.addColorStop(1, '#00000000');
-    c.fillStyle = rg; c.fillRect(0, 0, W, H);
+    c.globalAlpha = .38; c.drawImage(tint(S.a), gx - 320, gy - 320, 640, 640); c.globalAlpha = .12; c.drawImage(tint(S.b), gx - 200, gy - 200, 400, 400); c.globalAlpha = 1;
 
     if (S.kind === 'genesis') {
       // swaying god-ray shafts from the cave roof
@@ -72,9 +68,7 @@ const BG = (() => {
       for (let i = 0; i < 5; i++) {
         const px = (((i * 260 + r() * 120 - camPx * .22) % (W + 80)) + W + 80) % (W + 80) - 40;
         const ph = (t * .35 + i * .23) % 1, py = ph * (H + 120) - 60;
-        const grd = c.createLinearGradient(0, py - 70, 0, py + 70);
-        grd.addColorStop(0, '#00000000'); grd.addColorStop(.5, hexA(S.a, .5)); grd.addColorStop(1, '#00000000');
-        c.fillStyle = grd; c.fillRect(px, py - 70, 2.5, 140);
+        c.fillStyle = hexA(S.a, .3); c.fillRect(px, py - 50, 2.5, 100);
         c.fillStyle = hexA('#ffd7de', .5 * (1 - Math.abs(ph - .5) * 2)); c.fillRect(px - 1, py - 2, 4.5, 4);
       }
       // expanding pulse rings from the glow source
@@ -87,9 +81,7 @@ const BG = (() => {
       for (let i = 0; i < 6; i++) {
         const px = (((i * 240 + 100 + r() * 80 - camPx * .22) % (W + 60)) + W + 60) % (W + 60) - 30, py = 50 + r() * 120;
         const a = .18 + .12 * Math.sin(t * (1.1 + r()) + i * 2.3);
-        const lg = c.createRadialGradient(px, py, 0, px, py, 22);
-        lg.addColorStop(0, hexA(S.b, a)); lg.addColorStop(1, '#00000000');
-        c.fillStyle = lg; c.fillRect(px - 22, py - 22, 44, 44);
+        c.globalAlpha = Math.min(1, a * 2); c.drawImage(tint(S.b), px - 22, py - 22, 44, 44); c.globalAlpha = 1;
       }
     } else {
       // horizon: glowing river streaks flowing sideways (the gravity river)
@@ -102,18 +94,14 @@ const BG = (() => {
       }
       // the painted Horizon Door in the far art is the landmark; a soft golden pulse answers it
       const hx = W * (.72 - prog * .4), hy = 120;
-      const hr = c.createRadialGradient(hx, hy, 10, hx, hy, 110);
-      hr.addColorStop(0, hexA('#fff2c8', .22 + .1 * Math.sin(t * 1.3))); hr.addColorStop(.35, hexA(S.a, .12)); hr.addColorStop(1, '#00000000');
-      c.fillStyle = hr; c.beginPath(); c.arc(hx, hy, 110, 0, TAU); c.fill();
+      c.globalAlpha = .4 + .2 * Math.sin(t * 1.3); c.drawImage(tint('#fff2c8'), hx - 110, hy - 110, 220, 220); c.globalAlpha = 1;
     }
 
     // drifting fog bands between layers
     for (let i = 0; i < 4; i++) {
       const x = (((i * 360 - camPx * (.16 + i * .04) + t * (7 + i * 3)) % (W + 600)) + W + 600) % (W + 600) - 300;
       const y = 250 + i * 40 + Math.sin(t * .4 + i) * 12;
-      const fg = c.createRadialGradient(x, y, 0, x, y, 280);
-      fg.addColorStop(0, hexA(i % 2 ? S.a : S.b, .07)); fg.addColorStop(1, '#00000000');
-      c.fillStyle = fg; c.fillRect(x - 280, y - 140, 560, 280);
+      c.globalAlpha = .14; c.drawImage(tint(i % 2 ? S.a : S.b), x - 280, y - 140, 560, 280); c.globalAlpha = 1;
     }
     c.globalCompositeOperation = 'source-over';
 
@@ -139,9 +127,7 @@ const BG = (() => {
 
     // 6. readability dim + soft vignette so platforms and Void keep contrast
     c.fillStyle = 'rgba(6,3,18,.26)'; c.fillRect(0, 0, W, H);
-    const vg = c.createLinearGradient(0, 0, 0, H);
-    vg.addColorStop(0, 'rgba(4,2,14,.25)'); vg.addColorStop(.25, 'rgba(4,2,14,0)'); vg.addColorStop(.8, 'rgba(4,2,14,0)'); vg.addColorStop(1, 'rgba(4,2,14,.3)');
-    c.fillStyle = vg; c.fillRect(0, 0, W, H);
+    c.fillStyle = 'rgba(4,2,14,.14)'; c.fillRect(0, 0, W, 60); c.fillRect(0, H - 50, W, 50);
     c.restore();
   }
   return { draw };

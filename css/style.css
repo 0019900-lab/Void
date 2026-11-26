@@ -203,3 +203,23 @@ b,h1,h2,h3,.wl,.title{font-family:var(--ttl);font-weight:400;letter-spacing:.2px
 #rPet{position:absolute;left:14px;top:-84px;width:112px;height:112px;z-index:2}
 #pPet{position:absolute;left:50%;top:-86px;width:112px;height:112px;margin-left:-56px}
 #aPet{position:absolute;right:26px;top:4px;width:64px;height:64px;z-index:3;pointer-events:auto}#aPet .pb,#aPet .pl{pointer-events:none}
+
+/* v09: splash matches the painted menu */
+#splash{background:#0e0824 url(../assets/img/bg/menu_bg.webp) center/cover;text-align:center;overflow:hidden}
+#splash::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,rgba(20,8,50,.1),rgba(8,3,22,.72) 85%)}
+#splash .sGlow{position:absolute;left:50%;top:58%;width:420px;height:420px;margin:-210px 0 0 -210px;background:radial-gradient(circle,#7a3cf099 0%,#5a2ad044 45%,#0000 70%);animation:petglow 3.2s ease-in-out infinite}
+#splash .swm{position:absolute;left:50%;top:6px;width:250px;transform:translateX(-50%);filter:drop-shadow(0 0 18px #7b3fe4);animation:none}
+#splash #sVoid{position:absolute;left:50%;top:118px;width:200px;height:200px;margin-left:-100px;background-repeat:no-repeat;animation:bob 2.6s ease-in-out infinite}
+#splash .bar{position:absolute;left:50%;bottom:58px;width:300px;height:10px;margin:0 0 0 -150px;border-radius:10px;background:#0008;border:1.5px solid #f5c44a99;box-shadow:0 0 16px #7b3fe488}
+#splash .bar i{background:linear-gradient(90deg,#7b3fe4,var(--cy),var(--gold));transition:width .25s}
+#splash #tap{position:absolute;left:0;right:0;bottom:16px;margin:0;text-shadow:0 2px 10px #000}
+/* menu: bigger Void that clears the title */
+.wordmark{width:250px;top:2px}
+#menuVoid{top:112px;width:270px;height:270px}
+#rPet{top:-4px;left:6px;transform:scale(.58);transform-origin:0 0}
+
+/* v10: screens use the painted backgrounds */
+#ach{background:#0e0824 url(../assets/img/bg/scr_hall.webp) center/cover}#ach::before{content:"";position:absolute;inset:0;background:rgba(8,4,24,.45)}#ach>*{z-index:1}
+#pause.modal{background:#0e0824 url(../assets/img/bg/scr_attempts.webp) center/cover}#pause.modal::before,#result.modal::before{content:"";position:absolute;inset:0;background:rgba(8,4,24,.4)}#pause .panel,#result .panel{z-index:1}
+#result.modal{background:#0e0824 url(../assets/img/bg/scr_win.webp) center/cover}
+#result.modal.fail{background:#0e0824 url(../assets/img/bg/scr_death.webp) center/cover}
